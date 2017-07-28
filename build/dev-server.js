@@ -36,19 +36,19 @@ apiRoutes.get('/seller', function (req, res){
   })
 })
 
-apiRoutes.get('/goods'), function (req, res){
+apiRoutes.get('/goods', function (req, res){
     res.json({
       errno: 0,
       data: goods
     })
-}
+})
 
-apiRoutes.get('/ratings'), function (req, res){
+apiRoutes.get('/ratings', function (req, res){
     res.json({
       errno: 0,
       data: ratings
     })
-}
+})
 
 app.use('/api', apiRoutes)
 

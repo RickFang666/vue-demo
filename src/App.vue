@@ -1,24 +1,24 @@
 <template>
   <div id="app">
-  <v-header :seller="seller"></v-header>
+    <v-header :seller="seller"></v-header>
 
-  <div class="tab">
-    <div class="tab-item border-1px">
-      <router-link to="/goods" tag="div">商品</router-link>
+    <div class="tab">
+      <div class="tab-item border-1px">
+        <router-link to="/goods" tag="div">商品</router-link>
+      </div>
+      <div class="tab-item">
+        <router-link to="sellers" tag="div">商家</router-link>
+      </div>
+      <div class="tab-item">
+        <router-link to="/ratings" tag="div">评论</router-link>
+      </div>
     </div>
-    <div class="tab-item">
-      <router-link to="sellers" tag="div">商家</router-link>
-    </div>
-    <div class="tab-item">
-      <router-link to="/ratings" tag="div">评论</router-link>
-    </div>
-  </div>
-  <router-view></router-view>
+    <router-view></router-view>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import Header from './components/header/header'
+import header from './components/header/header'
 import axios from 'axios'
 
 const ERR_OK = 0
@@ -31,14 +31,14 @@ export default {
     }
   },
     components: {
-    'v-header': Header
+    'v-header': header,
   },
   created() {
     axios.get('api/seller').then((res) => {
       if(res.data.errno === ERR_OK) {
         this.seller = Object.assign({}, this.seller, res.data.data)
       }
-      console.log(this.seller)
+      // console.log(this.seller)
     })
   }
 }
