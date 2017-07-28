@@ -2,7 +2,7 @@
   <div class="goods">
     <div class="menu-wrapper" ref="menuWrapper">
       <ul>
-        <li v-for="item in goods" class="menu-item border-1px">
+        <li v-for="(item,index) in goods" class="menu-item border-1px" :class="{'current':currentIndex===index}" @click="selectMenu(index,$event)">
           <span class="text">
             <span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span>{{item.name}}
           </span>
@@ -11,7 +11,7 @@
     </div>
     <div class="foods-wrapper" ref="foodsWrapper">
       <ul>
-        <li v-for="item in goods" class="food-list" ref="foodList">
+        <li v-for="item in goods" class="food-list" ref="foodList" >
           <h1 class="title">{{item.name}}</h1>
           <ul>
             <li @click="selectFood(food,$event)" v-for="food in item.foods" class="food-item border-1px">
@@ -48,7 +48,21 @@ const ERR_OK = 0
 export default {
   data() {
     return {
-      goods: []
+      goods: [],
+      listHeight: [],
+      scrollY: 0
+    }
+  },
+  computed: {
+    currentIndex() {
+      for (let i=0; i<this.listHeight.length; i++) {
+        let height1 = this.listHeight[i]
+        let height2 = this.listHeight[i + 1]
+        if(!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
+          return i
+        }
+      }
+      return 0
     }
   },
   created() {
@@ -57,20 +71,45 @@ export default {
         this.goods = res.data.data
         this.$nextTick(() => {
         this._initScroll()
+        this._calculateHeight()
         })
       }
-      console.log(this.goods)
     })
     this.classMap = ['decrease','discount','guarantee','invoice','special']
   },
   mounted() {
-
-
   },
   methods: {
     _initScroll() {
-      this.menuScroll= new BScroll(this.$refs.menuWrapper, {})
-      this.foodsScroll = new BScroll(this.$refs.foodsWrapper,{})
+      this.menuScroll= new BScroll(this.$refs.menuWrapper, {
+        click: true
+      })
+      this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {
+        probeType: 3
+      })
+
+      this.foodsScroll.on('scroll', (pos) => {
+        this.scrollY = Math.abs(Math.round(pos.y))
+      })
+    },
+    _calculateHeight() {
+      let foodList = this.$refs.foodList
+      let height = 0
+      this.listHeight.push(height)
+      for (let i=0; i < foodList.length; i++) {
+        let item = foodList[i]
+        height += item.clientHeight
+        this.listHeight.push(height)
+      }
+    },
+    selectMenu(index, event) {
+      if(!event._constructed) {
+        return
+      }
+      let foodList = this.$refs.foodList
+      let el = foodList[index]
+      this.foodsScroll.scrollToElement(el, 300)
+
     }
   }
 }
@@ -96,6 +135,14 @@ export default {
         width 56px
         line-height 14px
         padding 0 12px
+        &.current
+          position relative
+          z-index 10
+          margin-top -1px
+          background #fff
+          font-weight 700
+          .text
+            border-none()
         border-1px(rgba(7, 17, 27, 0.1))
         .icon
           display: inline-block
