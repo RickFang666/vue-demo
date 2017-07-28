@@ -13,7 +13,7 @@
         <router-link to="/ratings" tag="div">评论</router-link>
       </div>
     </div>
-    <router-view></router-view>
+    <router-view :seller="seller"></router-view>
   </div>
 </template>
 

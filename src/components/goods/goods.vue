@@ -36,6 +36,10 @@
         </li>
       </ul>
     </div>
+    <div class="foot-wrapper">
+      <shopcart :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
+    </div>
+
   </div>
 </template>
 
@@ -43,6 +47,8 @@
 
 import axios from 'axios'
 import BScroll from 'better-scroll'
+import shopcart from 'components/shopcart/shopcart'
+
 const ERR_OK = 0
 
 export default {
@@ -52,6 +58,14 @@ export default {
       listHeight: [],
       scrollY: 0
     }
+  },
+  props: {
+    seller: {
+      type: Object
+    }
+  },
+  components: {
+    shopcart
   },
   computed: {
     currentIndex() {
@@ -145,13 +159,13 @@ export default {
             border-none()
         border-1px(rgba(7, 17, 27, 0.1))
         .icon
-          display: inline-block
-          width: 16px
-          height: 16px
-          vertical-align: top
-          margin-right: 4px
-          background-size: 16px 16px
-          background-repeat: no-repeat
+          display inline-block
+          width 16px
+          height 16px
+          vertical-align top
+          margin-right 4px
+          background-size 16px 16px
+          background-repeat no-repeat
           &.decrease
             bg-image('decrease_3')
           &.discount
@@ -168,58 +182,58 @@ export default {
           font-size 12px
           vertical-align middle
     .foods-wrapper
-      flex: 1
+      flex 1
       .title
-        padding-left: 14px
-        height: 26px
-        line-height: 26px
-        border-left: 2px solid #d9dde1
-        font-size: 12px
-        color: rgb(147, 153, 159)
-        background: #f3f5f7
+        padding-left 14px
+        height 26px
+        line-height 26px
+        border-left 2px solid #d9dde1
+        font-size 12px
+        color rgb(147, 153, 159)
+        background #f3f5f7
       .food-item
-        display: flex
-        margin: 18px
-        padding-bottom: 18px
+        display flex
+        margin 18px
+        padding-bottom 18px
         border-1px(rgba(7, 17, 27, 0.1))
-        &:last-child
+        &last-child
           border-none()
-          margin-bottom: 0
+          margin-bottom 0
         .icon
-          flex: 0 0 57px
-          margin-right: 10px
+          flex 0 0 57px
+          margin-right 10px
         .content
-          flex: 1
+          flex 1
           .name
-            margin: 2px 0 8px 0
-            height: 14px
-            line-height: 14px
-            font-size: 14px
-            color: rgb(7, 17, 27)
+            margin 2px 0 8px 0
+            height 14px
+            line-height 14px
+            font-size 14px
+            color rgb(7, 17, 27)
           .desc, .extra
-            line-height: 10px
-            font-size: 10px
-            color: rgb(147, 153, 159)
+            line-height 10px
+            font-size 10px
+            color rgb(147, 153, 159)
           .desc
-            line-height: 12px
-            margin-bottom: 8px
+            line-height 12px
+            margin-bottom 8px
           .extra
             .count
-              margin-right: 12px
+              margin-right 12px
           .price
-            font-weight: 700
-            line-height: 24px
+            font-weight 700
+            line-height 24px
             .now
-              margin-right: 8px
-              font-size: 14px
-              color: rgb(240, 20, 20)
+              margin-right 8px
+              font-size 14px
+              color rgb(240, 20, 20)
             .old
-              text-decoration: line-through
-              font-size: 10px
-              color: rgb(147, 153, 159)
+              text-decoration line-through
+              font-size 10px
+              color rgb(147, 153, 159)
           .cartcontrol-wrapper
-            position: absolute
-            right: 0
-            bottom: 12px
+            position absolute
+            right 0
+            bottom 12px
 
 </style>
