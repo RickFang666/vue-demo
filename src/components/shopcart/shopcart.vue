@@ -16,7 +16,6 @@
           {{payDesc}}
         </div>
       </div>
-      <transition>
       <div class="ball-container">
         <div v-for="ball in balls" v-show="ball.show" class="ball"></div>
       </div>
@@ -33,21 +32,22 @@ export default {
     },
     data() {
       return {
-        balls: [{
-          show: false
-        },
-        balls: [{
-          show: false
-        },
-        balls: [{
-          show: false
-        },
-        balls: [{
-          show: false
-        },
-        balls: [{
-          show: false
-        },
+        balls: [
+          {
+            show: false
+          },
+          {
+            show: false
+          },
+          {
+            show: false
+          },
+          {
+            show: false
+          },
+          {
+            show: false
+          }
         ]
       }
     },
