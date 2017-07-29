@@ -12,7 +12,7 @@
             <div class="price">{{totalPrice}}元</div>
             <div class="desc">另需配送费￥{{deliveryPrice}}元</div>
         </div>
-        <div class="content-right">
+        <div class="content-right" @click.stop.prevent="pay">
           <div class="pay" :class="payClass">
             {{payDesc}}
           </div>
@@ -53,6 +53,7 @@
     <div class="list-mask" v-show="listShow">
     </div>
     </transition>
+    <div class="payRemind" v-show="payShow"></div>
   </div>
 </template>
 
@@ -101,7 +102,8 @@ export default {
         }
       ],
       dropBalls: [],
-      fold: true
+      fold: true,
+      payShow: false
     }
   },
   computed: {
@@ -214,6 +216,12 @@ export default {
         return
       }
       this.fold = !this.fold
+    },
+    pay() {
+      if(this.totalPrice < this.minPrice) {
+        return
+      }
+      window.alert(`需要支付${this.totalPrice}元`)
     }
   },
   components: {
