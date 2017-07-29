@@ -16,6 +16,10 @@
           {{payDesc}}
         </div>
       </div>
+      <transition>
+      <div class="ball-container">
+        <div v-for="ball in balls" v-show="ball.show" class="ball"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -27,6 +31,26 @@ export default {
       type: Number,
       default: 0
     },
+    data() {
+      return {
+        balls: [{
+          show: false
+        },
+        balls: [{
+          show: false
+        },
+        balls: [{
+          show: false
+        },
+        balls: [{
+          show: false
+        },
+        balls: [{
+          show: false
+        },
+        ]
+      }
+    },
     minPrice: {
       type:Number,
       default: 0
@@ -36,8 +60,8 @@ export default {
       default() {
         return [
         {
-          price: 10,
-          count: 2
+          price: 0,
+          count: 0
         }]
       }
     }

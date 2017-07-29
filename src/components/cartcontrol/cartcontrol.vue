@@ -3,7 +3,7 @@
     <transition name="move">
       <div class="cart-decrease" v-show="food.count>0" @click.stop.prevent="decreaseCart">
           <span class="inner icon-remove_circle_outline"></span>
-        </div>
+      </div>
     </transition>
     <div class="cart-count" v-show="food.count>0">
       {{food.count}}
@@ -62,10 +62,10 @@
         line-height: 24px
         font-size: 24px
         color: rgb(0, 160, 220)
-        transition: all 0.2s linear
+        transition: all 0.3s linear
         transform: rotate(0)
       &.move-enter-active, &.move-leave-active
-        transition: all 0.2s linear
+        transition: all 0.3s linear
       &.move-enter, &.move-leave-active
         opacity: 0
         transform: translate3d(24px, 0, 0)
