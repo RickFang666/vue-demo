@@ -37,7 +37,7 @@
         }else {
           this.food.count++
         }
-        console.log('click')
+        this.$emit('add', event.target)
       },
       decreaseCart() {
         if(!event._constructed) {
